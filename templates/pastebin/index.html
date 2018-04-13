@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{{new_url}}</title>
+    <link href="/static/pastebin/css/stylesheet.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/static/pastebin/bootstrap/css/bootstrap.min.css">
+    <script type="text/javascript" src="/static/pastebin/js/jquery-1.4.js"></script>
+    <script type="text/javascript" src="/static/pastebin/js/application.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div id="header">
+        <h1>{{title}}</h1>
+      </div>
+      {% if error %}
+      <div id="error">
+        {{error}}
+      </div>
+      {% endif %}
+      <div id="main">
+        {% if previous %}
+          you pasted: <a href="{{previous}}">{{previous}}</a>&nbsp;-&nbsp;{% if noteline %}{{noteline}}{% endif %}
+        {% endif %}
+        <form name="pastebin" method="POST">
+          {% csrf_token %}
+          <div class="well well-sm"><h3>{{ new_url }}</h3></div>
+          Your name: <input type="text" name="user_name" width="40" value="{% if user_name %}{{user_name}}{% endif %}" /><br />
+          <textarea id="bin" name="content" rows="40" style="height: 70%; width: 100%;"></textarea><br />
+          <input type="submit" value="paste" />
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
