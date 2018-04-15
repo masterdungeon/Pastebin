@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html>
+    <head>
+    </style>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Pastebin</title>
+        <link rel="stylesheet" type="text/css" href="/static/pastebin/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/static/pastebin/css/style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <script>
+        function copy(selector){
+            var $temp = $("<div>");
+            $("body").append($temp);
+            $temp.attr("contenteditable", true)
+                .html($(selector).html()).select()
+                .on("focus", function() { document.execCommand('selectAll',false,null) })
+                .focus();
+            document.execCommand("copy");
+            $temp.remove();
+        }
+    </script>
+    <body>
+    <div class="continer">
+        <br/>
+        <br/>
+        <h1 class="text-center">Here is the copied text.</h1>
+        <br/>
+        <div class="panel panel-default">
+            <div id="demo" class="panel-body">{{ content }}</div>
+        </div>
+        <button type="button" class="btn btn-success" style="border-radius:0"; onclick="copy('#demo');">Copy</button>  
+        <br>
+        <br>          
+    </div>
+  </body>
+</html>
